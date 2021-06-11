@@ -8,6 +8,12 @@ public class AdvertisementImpl implements Advertisement {
 	private String content = "No content";
 	private Hashtable<Integer, Integer> allAppearances = new Hashtable<>();
 	
+	public AdvertisementImpl(int maxAppearance, double weight, String content) {
+		this.maxAppearance = maxAppearance;
+		this.weight = weight;
+		this.content = content;
+	}
+	
 	@Override
 	public int getMaxAppearance() {
 		return maxAppearance;

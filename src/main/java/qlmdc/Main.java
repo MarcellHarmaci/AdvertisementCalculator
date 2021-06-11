@@ -1,8 +1,36 @@
 package main.java.qlmdc;
 
+import java.util.Random;
+
 public class Main {
 	
 	public static void main(String[] args) {
-		// write your code here
+		Random random = new Random();
+		AdvertisementSystem system = new AdvertisementSystemImpl(random, 1);
+		
+		for (int i = 0; i < 20; i ++) {
+			Advertisement ad1 = new AdvertisementImpl(
+					1,
+					0.7,
+					"70% ad #" + i
+			);
+			Advertisement ad2 = new AdvertisementImpl(
+					1,
+					0.5,
+					"50% ad #" + i
+			);
+			Advertisement ad3 = new AdvertisementImpl(
+					1,
+					0.3,
+					"30% ad #" + i
+			);
+			system.registerAdvertisement(ad1);
+			system.registerAdvertisement(ad2);
+			system.registerAdvertisement(ad3);
+		}
+		
+		for (int i = 0; i < 120; i ++) {
+			system.showNextAdvertisement(0);
+		}
 	}
 }
