@@ -30,15 +30,18 @@ public class Main {
 			system.registerAdvertisement(ad3);
 		}
 		
-		// Show ads
+		// Show all ads on day 0
 		for (int i = 0; i < 60; i ++) {
 			system.showNextAdvertisement(0);
 		}
 		
-		// Show ads
+		// Show all ads on day 3
 		for (int i = 0; i < 60; i ++) {
 			system.showNextAdvertisement(3);
 		}
 		
+		// Last show call throws IllegalStateException with custom message
+		// All the ads has been shown the max times at this point
+		system.showNextAdvertisement(3);
 	}
 }

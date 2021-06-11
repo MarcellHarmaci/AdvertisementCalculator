@@ -39,12 +39,6 @@ public class AdvertisementSystemImpl implements AdvertisementSystem {
 			ad = ads.get(index);
 		}
 		
-		System.out.printf(
-				"%d < %d\t\t",
-				ad.lastAppearance(dayIndex, numberOfDays),
-				ad.getMaxAppearance()
-		);
-		System.out.print(ad.lastAppearance(dayIndex, numberOfDays) < ad.getMaxAppearance() ? "true\n" : "FALSE\n");
 		// Show the ad
 		showAd(ad, dayIndex);
 		
@@ -72,13 +66,6 @@ public class AdvertisementSystemImpl implements AdvertisementSystem {
 	}
 	
 	private void showAd(Advertisement ad, int dayIndex) {
-		System.out.printf(
-				"%d < %d\t\t",
-				ad.lastAppearance(dayIndex, numberOfDays),
-				ad.getMaxAppearance()
-		);
-		System.out.print(ad.lastAppearance(dayIndex, numberOfDays) < ad.getMaxAppearance() ? "true\n" : "FALSE\n");
-		
 		// Show ad
 		ad.showAdvertisement();
 		
