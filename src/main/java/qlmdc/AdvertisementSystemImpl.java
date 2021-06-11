@@ -24,21 +24,28 @@ public class AdvertisementSystemImpl implements AdvertisementSystem {
 	
 	@Override
 	public void showNextAdvertisement(int dayIndex) {
-		if (ads.isEmpty())
+		if (ads == null || ads.isEmpty())
 			throw new IllegalStateException("There are no ads registered, therefore no ad to show.");
 		
 		if (!canAnyAdBeShownAtDay(dayIndex))
-			throw new IllegalStateException("Non of the registered ads can be shown anymore at given day.");
+			throw new IllegalStateException("Non of the registered ads can be shown at the given day.");
 			
 		// Find an ad to show
-		while (random.nextDouble() < ads.get(index).getWeight() &&
-				!canAdBeShown(ads.get(index), dayIndex, numberOfDays)
+		Advertisement ad = ads.get(index);
+		while ( !canAdBeShown(ad, dayIndex, numberOfDays) ||
+				ad.getWeight() < random.nextDouble()
 		) {
 			incrementIndex();
+			ad = ads.get(index);
 		}
 		
+		System.out.printf(
+				"%d < %d\t\t",
+				ad.lastAppearance(dayIndex, numberOfDays),
+				ad.getMaxAppearance()
+		);
+		System.out.print(ad.lastAppearance(dayIndex, numberOfDays) < ad.getMaxAppearance() ? "true\n" : "FALSE\n");
 		// Show the ad
-		Advertisement ad = ads.get(index);
 		showAd(ad, dayIndex);
 		
 		incrementIndex();
@@ -53,7 +60,11 @@ public class AdvertisementSystemImpl implements AdvertisementSystem {
 	
 	// TODO Implement method
 	private boolean canAnyAdBeShownAtDay(int dayIndex) {
-		return true;
+		for (Advertisement ad : ads) {
+			if (ad.lastAppearance(dayIndex, numberOfDays) < ad.getMaxAppearance())
+				return true;
+		}
+		return false;
 	}
 	
 	private boolean canAdBeShown(Advertisement ad, int dayIndex, int numberOfDays) {
@@ -61,8 +72,14 @@ public class AdvertisementSystemImpl implements AdvertisementSystem {
 	}
 	
 	private void showAd(Advertisement ad, int dayIndex) {
+		System.out.printf(
+				"%d < %d\t\t",
+				ad.lastAppearance(dayIndex, numberOfDays),
+				ad.getMaxAppearance()
+		);
+		System.out.print(ad.lastAppearance(dayIndex, numberOfDays) < ad.getMaxAppearance() ? "true\n" : "FALSE\n");
+		
 		// Show ad
-		System.out.printf("%d < %d\n", ad.lastAppearance(dayIndex, numberOfDays), ad.getMaxAppearance());
 		ad.showAdvertisement();
 		
 		// Increment ad's appearance hash

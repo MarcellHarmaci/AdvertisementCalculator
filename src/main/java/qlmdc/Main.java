@@ -6,8 +6,9 @@ public class Main {
 	
 	public static void main(String[] args) {
 		Random random = new Random();
-		AdvertisementSystem system = new AdvertisementSystemImpl(random, 1);
+		AdvertisementSystem system = new AdvertisementSystemImpl(random, 3);
 		
+		// Register ads
 		for (int i = 0; i < 20; i ++) {
 			Advertisement ad1 = new AdvertisementImpl(
 					1,
@@ -29,8 +30,15 @@ public class Main {
 			system.registerAdvertisement(ad3);
 		}
 		
-		for (int i = 0; i < 120; i ++) {
+		// Show ads
+		for (int i = 0; i < 60; i ++) {
 			system.showNextAdvertisement(0);
 		}
+		
+		// Show ads
+		for (int i = 0; i < 60; i ++) {
+			system.showNextAdvertisement(3);
+		}
+		
 	}
 }
